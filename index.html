@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Library</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js defer"></script>
+    </head>
+    <body>
+        <header>
+            <ul class="left">
+                <li>
+                    <img src="img/book.jpg" alt="Book icon">
+                </li>
+                <li>
+                    <h1>My Library</h1>
+                </li>
+            </ul>
+
+            <menu class="right">
+                <li>
+                    <button type="button">
+                        <img src="" alt="Plus icon">
+                        Add new book
+                    </button>
+                </li>
+                <li>
+                    <select name="filter" id="filter">
+                        <option value="pagesLow">
+                            Pages: Low to High
+                        </option>
+                        <option value="pagesHigh">
+                            Pages: High to Low
+                        </option>
+                        <option value="read">
+                            Books Read
+                        </option>
+                        <option value="unread">
+                            Unread Books
+                        </option>
+                    </select>
+                </li>
+            </menu>
+        </header>
+
+        <main>
+            <section class="log">
+                <h2>Reading Log</h2>
+                <article>
+                    <h3>Total books</h3>
+                    <p class="total">3</p>
+                </article>
+                <article>
+                    <h3>Books read</h3>
+                    <p class="read">2</p>
+                </article>
+                <article>
+                    <h3>Unread books</h3>
+                    <p class="unread">1</p>
+                </article>
+            </section>
+
+            <section class="library">
+                <h2>My Books</h2>
+                <article class="book-container">
+                    <img src="img/plus.svg" alt="Plus icon">
+                    <h3>Add new book</h3>
+                </article>
+            </section>
+        </main>
+
+        <footer>
+            <a
+                href="https://github.com/hannahkim313">
+                <i class='fa fa-github'></i>
+                Hannah Kim
+            </a>
+        </footer>
+    </body>
+</html>
