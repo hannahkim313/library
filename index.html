@@ -8,41 +8,27 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="reset.css">
         <link rel="stylesheet" href="style.css">
-        <script src="script.js defer"></script>
+        <script src="script.js" defer></script>
     </head>
     <body>
         <header>
-            <ul class="left">
-                <li>
-                    <img src="img/book.jpg" alt="Book icon">
-                </li>
-                <li>
-                    <h1>My Library</h1>
-                </li>
-            </ul>
+            <a href="">
+                <ul class="left">
+                    <li>
+                        <img src="img/book.jpg" alt="Book icon">
+                    </li>
+                    <li>
+                        <h1>My Library</h1>
+                    </li>
+                </ul>
+            </a>
 
             <menu class="right">
                 <li>
-                    <button type="button">
-                        <img src="" alt="Plus icon">
+                    <button type="button" class="default">
+                        <img src="img/plus.svg" alt="Plus icon">
                         Add new book
                     </button>
-                </li>
-                <li>
-                    <select name="filter" id="filter">
-                        <option value="pagesLow">
-                            Pages: Low to High
-                        </option>
-                        <option value="pagesHigh">
-                            Pages: High to Low
-                        </option>
-                        <option value="read">
-                            Books Read
-                        </option>
-                        <option value="unread">
-                            Unread Books
-                        </option>
-                    </select>
                 </li>
             </menu>
         </header>
@@ -50,26 +36,95 @@
         <main>
             <section class="log">
                 <h2>Reading Log</h2>
-                <article>
-                    <h3>Total books</h3>
-                    <p class="total">3</p>
-                </article>
-                <article>
-                    <h3>Books read</h3>
-                    <p class="read">2</p>
-                </article>
-                <article>
-                    <h3>Unread books</h3>
-                    <p class="unread">1</p>
-                </article>
+                <div class="data-container">
+                    <article>
+                        <h3>Total Books</h3>
+                        <p class="total">3</p>
+                    </article>
+                    <article>
+                        <h3>Books Read</h3>
+                        <p class="read">2</p>
+                    </article>
+                    <article>
+                        <h3>Unread Books</h3>
+                        <p class="unread">1</p>
+                    </article>
+                </div>
             </section>
 
             <section class="library">
                 <h2>My Books</h2>
-                <article class="book-container">
-                    <img src="img/plus.svg" alt="Plus icon">
-                    <h3>Add new book</h3>
-                </article>
+                <div class="books-container">
+                    <article class="book">
+                        <div class="info">
+                            <h3>The Da Vinci Code</h3>
+                            <p>Written by Dan Brown</p>
+                            <p>689 pages</p>
+                        </div>
+                        <div class="action">
+                            <div class="checkbox-container">
+                                <p>Read:</p>
+                                <input
+                                    type="checkbox"
+                                    id="toggle_1"
+                                    name="read"
+                                    class="checkbox"
+                                    checked
+                                >
+                                <label for="toggle_1" class="switch"></label>
+                            </div>
+                            <button>
+                                <img src="img/delete.svg" alt="Trashcan icon">
+                            </button>
+                        </div>
+                    </article>
+                    <article class="book">
+                        <div class="info">
+                            <h3>To Kill a Mockingbird</h3>
+                            <p>Written by Harper Lee</p>
+                            <p>281 pages</p>
+                        </div>
+                        <div class="action">
+                            <div class="checkbox-container">
+                                <p>Read:</p>
+                                <input
+                                    type="checkbox"
+                                    id="toggle_2"
+                                    name="read"
+                                    class="checkbox"
+                                    checked
+                                >
+                                <label for="toggle_2" class="switch"></label>
+                            </div>
+                            <button>
+                                <img src="img/delete.svg" alt="Trashcan icon">
+                            </button>
+                        </div>
+                    </article>
+                    <article class="book">
+                        <div class="info">
+                            <h3>The Giver</h3>
+                            <p>Written by Lois Lowry</p>
+                            <p>240 pages</p>
+                        </div>
+                        <div class="action">
+                            <div class="checkbox-container">
+                                <p>Read:</p>
+                                <input
+                                    type="checkbox"
+                                    id="toggle_3"
+                                    name="read"
+                                    class="checkbox"
+                                    checked
+                                >
+                                <label for="toggle_3" class="switch"></label>
+                            </div>
+                            <button>
+                                <img src="img/delete.svg" alt="Trashcan icon">
+                            </button>
+                        </div>
+                    </article>
+                </div>
             </section>
         </main>
 
