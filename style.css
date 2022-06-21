@@ -1,0 +1,275 @@
+:root {
+    --box-shadow: 2px 2px 5px #6b4d4b73, -2px 2px 5px #6b4d4b73;
+    --box-shadow-thin: 1px 1px 3px #6b4d4b73, -1px 1px 3px #6b4d4b73;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr 85px;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+button:hover,
+label:hover {
+    cursor: pointer;
+}
+
+img[src*="plus"] {
+    width: 1rem;
+}
+
+/******************************************************************************/
+/* Selectors for the header start here.
+/******************************************************************************/
+
+header {
+    padding: 16px 32px;
+
+    background-color: white;
+    box-shadow: var(--box-shadow);
+
+    position: sticky;
+    top: 0;
+
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    
+    display: flex;
+    justify-content: space-between;
+}
+
+header .left,
+header .right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Selectors for the left side of the header start here. */
+
+img[src*="book"] {
+    width: 85px;
+}
+
+/* Selectors for the right side of the header start here. */
+
+header .right button {
+    padding: 8px 10px;
+
+    background-color: #eeeeee;
+    border: none;
+    border-radius: 32px;
+
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+/******************************************************************************/
+/* Selectors for the main section start here.
+/******************************************************************************/
+
+main {
+    width: 100%;
+    height: 100%;
+
+    background-color: #CCC2C1;
+    
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    align-items: center;
+}
+
+/* Selectors for the reading log start here. */
+
+.log {
+    margin: 64px 32px 32px 32px;
+    padding: 32px;
+
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: var(--box-shadow-thin);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.log .data-container {
+    padding-top: 16px;
+
+    border-top: 1px solid black;
+
+    display: flex;
+    gap: 32px;
+}
+
+.log article {
+    text-align: center;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.log article > p {
+    width: 40px;
+    height: 40px;
+
+    color: white;
+    background-color: #6B4D4B;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Selectors for the library start here. */
+
+.library {
+    margin: 32px 32px 64px 32px;
+    padding: 32px;
+
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: var(--box-shadow-thin);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.library .books-container {
+    width: 100%;
+
+    padding-top: 32px;
+
+    border-top: 1px solid black;
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    grid-template-rows: 150px;
+    grid-auto-rows: 150px;
+    justify-content: center;
+    gap: 32px;
+}
+
+.library .book {
+    width: 100%;
+    
+    padding: 16px;
+    
+    border-radius: 16px;
+    box-shadow: var(--box-shadow);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.library .book .action {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+}
+
+.library .checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox {
+    display: none;
+}
+
+.switch {
+    width: 40px;
+    height: 20px;
+
+    background-color: #dddddd;
+    border-radius: 20px;
+
+    position: relative;
+
+    display: inline-block;
+
+    transition: all 0.3s;
+}
+
+.switch::after {
+    width: 18px;
+    height: 18px;
+
+    content: "";
+
+    background-color: white;
+    border-radius: 50%;
+
+    position: absolute;
+    top: 1px;
+    left: 1px;
+
+    transition: all 0.3s;
+}
+
+.checkbox:checked + .switch::after {
+    left: 20px;
+}
+
+.checkbox:checked + .switch {
+    background-color: #9BC53D;
+}
+
+.library .book .action button {
+    background-color: white;
+    border:none
+}
+
+/******************************************************************************/
+/* Selectors for the footer start here.
+/******************************************************************************/
+
+footer {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/******************************************************************************/
+/* Media queries start here.
+/******************************************************************************/
+
+@media only screen and (max-width: 600px) {
+    header .right button.default{
+        display: none;
+    }
+
+    header .right button.small {
+        padding: 10px;
+
+        display: flex;
+    }
+}
