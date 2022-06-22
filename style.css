@@ -74,6 +74,12 @@ header .right button {
     gap: 2px;
 }
 
+header .right button:hover {
+    background-color: #dddddd;
+    
+    transition-duration: 0.4s;
+}
+
 /******************************************************************************/
 /* Selectors for the main section start here.
 /******************************************************************************/
