@@ -11,6 +11,58 @@
         <script src="script.js" defer></script>
     </head>
     <body>
+        <form action="" method="post">
+            <button type="button" class="close">
+                <img
+                    src="img/close-circle-outline.svg"
+                    alt="Circle with X in center"
+                >
+            </button>
+            <h3>Add new book</h3>
+            <div class="input-container">
+                <label for="title">Book title:</label>
+                <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    minlength="1"
+                    required
+                >
+                <label for="author">Author name:</label>
+                <input
+                    type="text"
+                    name="author"
+                    id="author"
+                    minlength="1"
+                    required
+                >
+                <label for="pages">Number of pages:</label>
+                <input
+                    type="number"
+                    name="pages"
+                    id="pages"
+                    min="1"
+                    required
+                >
+                <div class="container">
+                    <img src="img/open-book.jpg" alt="Open book icon">
+                    <div class="checkbox-container">
+                        <p>Read:</p>
+                        <input
+                            type="checkbox"
+                            id="read_status"
+                            name="read_status"
+                            class="checkbox"
+                            checked
+                            required
+                        >
+                        <label for="read_status" class="switch"></label>
+                    </div>
+                </div>
+                <button type="submit" class="submit">Submit</button>
+            </div>
+        </form>
+        
         <header>
             <a href="">
                 <ul class="left">

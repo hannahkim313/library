@@ -3,9 +3,14 @@
  ******************************************************************************/
 
 const menu = document.querySelector("menu");
-const addBtnDefault = document.querySelector(".default");
+const addBtn = document.querySelector(".default");
 
-const addBtnDefaultProps = window.getComputedStyle(addBtnDefault);
+const main = document.querySelector("main");
+const form = document.querySelector("form");
+const closeBtn = document.querySelector(".close");
+
+const addBtnProps = window.getComputedStyle(addBtn);
+
 const mediaQuery = window.matchMedia("(max-width: 600px)");
 
 /*******************************************************************************
@@ -18,12 +23,15 @@ const mediaQuery = window.matchMedia("(max-width: 600px)");
  */
 function createSmallAddBtn() {
     const li = document.createElement("li");
+    
     const button = document.createElement("button");
-    const img = document.createElement("IMG");
     button.type = "button";
     button.classList.add = "small";
+
+    const img = document.createElement("IMG");
     img.src = "img/plus.svg";
     img.alt = "Plus icon";
+
     button.appendChild(img);
     li.appendChild(button);
     menu.appendChild(li);
@@ -34,6 +42,7 @@ function createSmallAddBtn() {
  ******************************************************************************/
 
 window.addEventListener("pageshow", e => {
+    form.style.display = "none";
     if (mediaQuery.matches) createSmallAddBtn();
 });
 
@@ -42,8 +51,16 @@ window.addEventListener("resize", e => {
     else if (
         !mediaQuery.matches &&
         menu.childElementCount === 2 &&
-        addBtnDefaultProps.getPropertyValue("display") === "flex"
+        addBtnProps.getPropertyValue("display") === "flex"
     ) {
         menu.removeChild(menu.lastElementChild);
     }
+});
+
+addBtn.addEventListener("click", e => {
+    form.style.display = "flex";
+});
+
+closeBtn.addEventListener("click", e => {
+    form.style.display = "none";
 });

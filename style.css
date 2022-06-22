@@ -56,7 +56,7 @@ header .right {
 
 /* Selectors for the left side of the header start here. */
 
-img[src*="book"] {
+header img[src*="book"] {
     width: 85px;
 }
 
@@ -243,6 +243,83 @@ main {
 .library .book .action button {
     background-color: white;
     border:none
+}
+
+/* Selectors for the form start here. */
+
+form {
+    width: 340px;
+    height: 425px;
+
+    margin: auto;
+
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+form .close {
+    background-color: white;
+    border: none;
+    
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}
+
+form .container {
+    margin: 8px 0;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+form img[src*="book"] {
+    width: 75px;
+}
+
+form .checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+form .input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+form input {
+    height: 32px;
+
+    padding: 8px;
+
+    background-color: #eeeeee;
+    border: none;
+    border-radius: 8px;
+}
+
+form .submit {
+    height: 32px;
+
+    background-color: #9BC53D;
+    border: none;
+    border-radius: 16px;
 }
 
 /******************************************************************************/
