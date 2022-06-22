@@ -328,6 +328,14 @@ form .submit {
     border-radius: 16px;
 }
 
+form .submit:hover {
+    color: white;
+    
+    background-color: #81a533;
+
+    transition-duration: 0.4s;
+}
+
 /******************************************************************************/
 /* Selectors for the footer start here.
 /******************************************************************************/
