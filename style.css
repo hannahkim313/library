@@ -334,19 +334,3 @@ footer {
     justify-content: center;
     align-items: center;
 }
-
-/******************************************************************************/
-/* Media queries start here.
-/******************************************************************************/
-
-@media only screen and (max-width: 600px) {
-    header .right button.default{
-        display: none;
-    }
-
-    header .right button.small {
-        padding: 10px;
-
-        display: flex;
-    }
-}
