@@ -52,11 +52,9 @@ function makeButtonSmall() {
  */
 function validateForm() {
     let filled = 0;
-    let index = 0;
     for (input of formInputs) {
-        if (index === 3) break;
+        if (input.id === "read_status") break;
         if (input.value.length !== 0) filled++;
-        index++;
     }
     if (filled === 3) form.style.display = "none";
     return filled === 3 ? true : false;
@@ -68,8 +66,8 @@ function validateForm() {
 function clearForm() {
     for (input of formInputs) {
         if (input.id !== "read_status") input.value = "";
+        else input.checked = "true";
     }
-    formInputs[3].checked = "true";
 }
 
 /**
@@ -174,8 +172,8 @@ submitBtn.addEventListener("click", e => {
     if (validateForm() === true) {
         addBookToLibrary();
         displayBook();
+        e.preventDefault();
     }
-    e.preventDefault();
 });
 
 /*******************************************************************************
