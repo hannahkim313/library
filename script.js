@@ -7,6 +7,8 @@ const addBtn = document.querySelector(".default");
 
 const main = document.querySelector("main");
 
+const booksContainer = document.querySelector(".books-container");
+
 const form = document.querySelector("form");
 const formInputs = document.querySelectorAll(".input-container input");
 const closeBtn = document.querySelector(".close");
@@ -57,6 +59,17 @@ function validateForm() {
         index++;
     }
     if (filled === 3) form.style.display = "none";
+    return filled === 3 ? true : false;
+}
+
+/**
+ * Clear input fields of form after each submission.
+ */
+function clearForm() {
+    for (input of formInputs) {
+        if (input.id !== "read_status") input.value = "";
+    }
+    formInputs[3].checked = "true";
 }
 
 /**
@@ -70,6 +83,70 @@ function addBookToLibrary() {
         formInputs[3].checked
     );
     library.push(book);
+}
+
+/**
+ * Displays newly added book into "My Library."
+ */
+function displayBook() {
+    let index = 0;
+    for (const book of library) {
+        if (index === library.length - 1) {
+            const article = document.createElement("article");
+        
+            const info = document.createElement("div");
+            const title = document.createElement("h3");
+            const em = document.createElement("em");
+            const author = document.createElement("p");
+            const pages = document.createElement("p");
+        
+            const action = document.createElement("div");
+            const checkboxContainer = document.createElement("div");
+            const text = document.createElement("p");
+            const checkbox = document.createElement("input");
+            const label = document.createElement("label");
+            const deleteBtn = document.createElement("button");
+            const deleteImg = document.createElement("img");
+        
+            article.setAttribute("class", "book");
+            info.setAttribute("class", "info");
+            action.setAttribute("class", "action");
+
+            checkboxContainer.setAttribute("class", "checkbox-container");
+            checkbox.setAttribute("type", "checkbox");
+            checkbox.setAttribute("id", `toggle_${library.length}`);
+            checkbox.setAttribute("name", "read_status");
+            checkbox.setAttribute("class", "checkbox");
+            if (book.hasRead === true) checkbox.setAttribute("checked", "true");
+            label.setAttribute("for", `toggle_${library.length}`);
+            label.setAttribute("class", "switch");
+        
+            deleteImg.src = "img/delete.svg";
+            deleteImg.alt = "Trash can icon";
+        
+            em.textContent = `${book.title}`;
+            author.textContent = `Written by ${book.author}`;
+            pages.textContent = `${book.pages} pages`;
+            text.textContent = "Read:";
+            
+            title.appendChild(em);
+            info.appendChild(title);
+            info.appendChild(author);
+            info.appendChild(pages);
+
+            checkboxContainer.appendChild(text);
+            checkboxContainer.appendChild(checkbox);
+            checkboxContainer.appendChild(label);
+            deleteBtn.appendChild(deleteImg);
+            action.appendChild(checkboxContainer);
+            action.appendChild(deleteBtn);
+
+            article.appendChild(info);
+            article.appendChild(action);
+            booksContainer.appendChild(article);
+        }
+        index++;
+    }
 }
 
 /*******************************************************************************
@@ -86,13 +163,18 @@ window.addEventListener("resize", e => {
     else addBtn.textContent = "+ Add new book";
 });
 
-addBtn.addEventListener("click", e => form.style.display = "flex");
+addBtn.addEventListener("click", e => {
+    form.style.display = "flex";
+    clearForm();
+});
 
 closeBtn.addEventListener("click", e => form.style.display = "none");
 
 submitBtn.addEventListener("click", e => {
-    validateForm();
-    addBookToLibrary();
+    if (validateForm() === true) {
+        addBookToLibrary();
+        displayBook();
+    }
     e.preventDefault();
 });
 
@@ -101,11 +183,11 @@ submitBtn.addEventListener("click", e => {
  ******************************************************************************/
 
 /**
- * 1. Display book in "My Library" after new book is added.
- * 2. Implement a function that toggles a book's read status on
+ * 1. Implement a function that toggles a book's read status on
  *    a Book's prototype instance.
- * 3. Display delete confirmation card when delete icon is clicked and,
+ * 2. Display delete confirmation card when delete icon is clicked and,
  *    when confirmed to delete book, remove it from "My Library."
- * 4. Update reading log when new book is added.
- * 5. Update reading log when user changes read status of a book.
+ * 3. Update reading log when new book is added.
+ * 4. Update reading log when user changes read status of a book.
+ * 5. Add 3 default books created in HTML into library array for manipulation.
  */
