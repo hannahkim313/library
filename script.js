@@ -7,6 +7,10 @@ const addBtn = document.querySelector(".default");
 
 const main = document.querySelector("main");
 
+const totalBooks = document.querySelector(".total");
+const read = document.querySelector(".read");
+const unread = document.querySelector(".unread");
+
 const booksContainer = document.querySelector(".books-container");
 
 const form = document.querySelector("form");
@@ -22,6 +26,11 @@ const mediaQuery = window.matchMedia("(max-width: 600px)");
  ******************************************************************************/
 
 const library = [];
+const readingLog = {
+    totalBooks: 3,
+    read: 2,
+    unread: 1
+};
 
 /*******************************************************************************
  * Constructors start here.
@@ -89,7 +98,9 @@ function addBookToLibrary(isUserInput) {
             formInputs[3].checked
         );
         library.push(book);
+        readingLog.totalBooks++;
     }
+    updateReadingLog();
 }
 
 /**
@@ -159,6 +170,8 @@ function displayBook(isUserInput) {
  */
 function removeBookFromLibrary(index) {
     library.splice(index, 1);
+    readingLog.totalBooks--;
+    updateReadingLog();
 }
 
 /**
@@ -201,6 +214,12 @@ function resetLibraryGrid() {
         booksContainer.style.gridTemplateColumns = "repeat(auto-fit, 300px)";
         booksContainer.style.gridTemplateRows = "150px";
     }
+}
+
+function updateReadingLog() {
+    totalBooks.textContent = `${readingLog.totalBooks}`;
+    read.textContent = `${readingLog.read}`;
+    unread.textContent = `${readingLog.unread}`;
 }
 
 /*******************************************************************************
