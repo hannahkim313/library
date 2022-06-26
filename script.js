@@ -76,7 +76,7 @@ function clearForm() {
  * @param {Boolean} isUserInput - Is book information from user input or not.
  */
 function addBookToLibrary(isUserInput) {
-    if (isUserInput === false) {
+    if (!isUserInput) {
         const bookOne = new Book("The Da Vinci Code", "Dan Brown", "689", true);
         const bookTwo = new Book("To Kill a Mockingbird", "Harper Lee", "281", true);
         const bookThree = new Book("The Giver", "Lois Lowry", "240", false);
@@ -98,7 +98,7 @@ function addBookToLibrary(isUserInput) {
  */
 function displayBook(isUserInput) {
     for (let i = 0; i < library.length; i++) {
-        if (isUserInput === true) i = library.length - 1;
+        if (isUserInput) i = library.length - 1;
         const article = document.createElement("article");
         const info = document.createElement("div");
         const title = document.createElement("h3");
@@ -115,6 +115,7 @@ function displayBook(isUserInput) {
         const deleteImg = document.createElement("img");
 
         article.setAttribute("class", "book");
+        article.setAttribute("data-index", `${i}`);
         info.setAttribute("class", "info");
         action.setAttribute("class", "action");
 
@@ -122,7 +123,7 @@ function displayBook(isUserInput) {
         checkbox.setAttribute("type", "checkbox");
         checkbox.setAttribute("name", "read_status");
         checkbox.setAttribute("class", "checkbox");
-        if (library[i].hasRead === true) checkbox.setAttribute("checked", "true");
+        if (library[i].hasRead) checkbox.setAttribute("checked", "true");
         label.setAttribute("for", `toggle_${library.length}`);
         label.setAttribute("class", "switch");
 
@@ -152,6 +153,56 @@ function displayBook(isUserInput) {
     }
 }
 
+/**
+ * Removes the book at a given index of library array.
+ * @param {Number} index - Index number.
+ */
+function removeBookFromLibrary(index) {
+    library.splice(index, 1);
+}
+
+/**
+ * Removes all child nodes of a given parent node.
+ * @param {Object} parent - Parent element object to remove child nodes from.
+ */
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
+/**
+ * Displays a message when the library is currently empty.
+ */
+ function displayEmptyMessage() {
+    const article = document.createElement("article");
+    const message = document.createElement("p");
+    
+    booksContainer.style.alignItems = "center";
+    booksContainer.style.gridTemplateColumns = "auto";
+    booksContainer.style.gridTemplateRows = "auto";
+
+    article.style.gridColumn = "auto";
+    article.style.gridRow = "auto";
+
+    message.textContent = "There are currently no books in your library."
+    message.style.textAlign = "center";
+
+    article.appendChild(message);
+    booksContainer.appendChild(article);
+}
+
+/**
+ * Resets the grid layout of "My Books" to its default styling.
+ */
+function resetLibraryGrid() {
+    if (library.length === 1) {
+        booksContainer.style.alignItems = "normal";
+        booksContainer.style.gridTemplateColumns = "repeat(auto-fit, 300px)";
+        booksContainer.style.gridTemplateRows = "150px";
+    }
+}
+
 /*******************************************************************************
  * Event listeners start here.
  ******************************************************************************/
@@ -176,10 +227,22 @@ addBtn.addEventListener("click", e => {
 closeBtn.addEventListener("click", e => form.style.display = "none");
 
 submitBtn.addEventListener("click", e => {
+    if (library.length === 0) booksContainer.firstElementChild.remove();
     if (validateForm() === true) {
         addBookToLibrary(true);
+        resetLibraryGrid();
         displayBook(true);
         e.preventDefault();
+    }
+});
+
+booksContainer.addEventListener("click", e => {
+    if (e.target.tagName === "IMG") {
+        const index = parseInt(e.target.closest(".book").getAttribute("data-index"));
+        removeBookFromLibrary(index);
+        removeAllChildNodes(booksContainer);
+        displayBook(false);
+        if (booksContainer.childElementCount === 0) displayEmptyMessage();
     }
 });
 
@@ -190,8 +253,6 @@ submitBtn.addEventListener("click", e => {
 /**
  * 1. Implement a function that toggles a book's read status on
  *    a Book's prototype instance.
- * 2. Display delete confirmation card when delete icon is clicked and,
- *    when confirmed to delete book, remove it from "My Library."
- * 3. Update reading log when new book is added.
- * 4. Update reading log when user changes read status of a book.
+ * 2. Update reading log when new book is added.
+ * 3. Update reading log when user changes read status of a book.
  */
