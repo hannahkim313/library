@@ -36,12 +36,31 @@ const readingLog = {
  * Constructors start here.
  ******************************************************************************/
 
+/**
+ * Constructs a book object.
+ * @param {String} title - Title of book.
+ * @param {String} author - Author of book.
+ * @param {String} pages - Number of pages of book.
+ * @param {Boolean} hasRead - True if user has read the book.
+ */
 function Book(title, author, pages, hasRead) {
     this.title = title,
     this.author = author,
     this.pages = pages,
     this.hasRead = hasRead
 }
+
+/*******************************************************************************
+ * Prototype declarations start here.
+ ******************************************************************************/
+
+/**
+ * Changes the read status of a book at a given index of library array.
+ * @param {Number} index - Index number.
+ */
+Book.prototype.changeReadStatus = function(index) {
+    this.hasRead = this.hasRead === true ? false : true;
+};
 
 /*******************************************************************************
  * Function declarations start here.
@@ -82,15 +101,36 @@ function clearForm() {
 
 /**
  * Creates a new book object and stores it into library array.
- * @param {Boolean} isUserInput - Is book information from user input or not.
+ * @param {Boolean} isUserInput - True if book information is from user input.
+ * @param {Object} checkbox - Checkbox element object that the user selected.
  */
-function addBookToLibrary(isUserInput) {
+function addBookToLibrary(isUserInput, checkbox) {
     if (!isUserInput) {
         const bookOne = new Book("The Da Vinci Code", "Dan Brown", "689", true);
         const bookTwo = new Book("To Kill a Mockingbird", "Harper Lee", "281", true);
         const bookThree = new Book("The Giver", "Lois Lowry", "240", false);
         library.push(bookOne, bookTwo, bookThree);
-    } else {
+    }
+    else if (checkbox) {
+        const index = checkbox.closest(".book").getAttribute("data-index");
+        const currentBook = library[index];
+        const newBook = new Book(
+            currentBook.title,
+            currentBook.author,
+            currentBook.pages,
+            currentBook.hasRead
+        );
+        newBook.changeReadStatus();
+        library.splice(index, 1, newBook);
+        if (newBook.hasRead === true) {
+            readingLog.read++;
+            readingLog.unread--;
+        } else {
+            readingLog.read--;
+            readingLog.unread++;
+        }
+    }
+    else {
         const book = new Book(
             formInputs[0].value,
             formInputs[1].value,
@@ -99,13 +139,15 @@ function addBookToLibrary(isUserInput) {
         );
         library.push(book);
         readingLog.totalBooks++;
+        if (book.hasRead === true) readingLog.read++;
+        else readingLog.unread++;
     }
     updateReadingLog();
 }
 
 /**
  * Displays newly added book into "My Library."
- * @param {Boolean} isUserInput - Is book information from user input or not.
+ * @param {Boolean} isUserInput - True if book information is from user input.
  */
 function displayBook(isUserInput) {
     for (let i = 0; i < library.length; i++) {
@@ -169,9 +211,11 @@ function displayBook(isUserInput) {
  * @param {Number} index - Index number.
  */
 function removeBookFromLibrary(index) {
-    library.splice(index, 1);
+    if (library[index].hasRead === true) readingLog.read--;
+    else readingLog.unread--;
     readingLog.totalBooks--;
     updateReadingLog();
+    library.splice(index, 1);
 }
 
 /**
@@ -216,6 +260,9 @@ function resetLibraryGrid() {
     }
 }
 
+/**
+ * Updates the values of the reading log.
+ */
 function updateReadingLog() {
     totalBooks.textContent = `${readingLog.totalBooks}`;
     read.textContent = `${readingLog.read}`;
@@ -256,6 +303,12 @@ submitBtn.addEventListener("click", e => {
 });
 
 booksContainer.addEventListener("click", e => {
+    if (e.target.tagName === "LABEL") {
+        const checkbox = e.target.previousElementSibling;
+        addBookToLibrary(true, checkbox);
+        if (checkbox.checked) checkbox.removeAttribute("checked");
+        else checkbox.setAttribute("checked", "true");
+    }
     if (e.target.tagName === "IMG") {
         const index = parseInt(e.target.closest(".book").getAttribute("data-index"));
         removeBookFromLibrary(index);
@@ -264,14 +317,3 @@ booksContainer.addEventListener("click", e => {
         if (booksContainer.childElementCount === 0) displayEmptyMessage();
     }
 });
-
-/*******************************************************************************
- * Remaining tasks/issues left to resolve.
- ******************************************************************************/
-
-/**
- * 1. Implement a function that toggles a book's read status on
- *    a Book's prototype instance.
- * 2. Update reading log when new book is added.
- * 3. Update reading log when user changes read status of a book.
- */
