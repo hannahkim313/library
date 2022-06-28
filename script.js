@@ -84,7 +84,8 @@ function validateForm() {
     let filled = 0;
     for (input of formInputs) {
         if (input.id === "read_status") break;
-        if (input.value.length !== 0) filled++;
+        if (input.id !== "pages" && input.value.length !== 0) filled++;
+        if (input.id === "pages" && input.value > 0) filled++;
     }
     if (filled === 3) form.style.display = "none";
     return filled === 3 ? true : false;
