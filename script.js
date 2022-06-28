@@ -59,7 +59,7 @@ function Book(title, author, pages, hasRead) {
  * @param {Number} index - Index number.
  */
 Book.prototype.changeReadStatus = function(index) {
-    this.hasRead = this.hasRead === true ? false : true;
+    this.hasRead = this.hasRead ? false : true;
 };
 
 /*******************************************************************************
@@ -122,7 +122,7 @@ function addBookToLibrary(isUserInput, checkbox) {
         );
         newBook.changeReadStatus();
         library.splice(index, 1, newBook);
-        if (newBook.hasRead === true) {
+        if (newBook.hasRead) {
             readingLog.read++;
             readingLog.unread--;
         } else {
@@ -139,7 +139,7 @@ function addBookToLibrary(isUserInput, checkbox) {
         );
         library.push(book);
         readingLog.totalBooks++;
-        if (book.hasRead === true) readingLog.read++;
+        if (book.hasRead) readingLog.read++;
         else readingLog.unread++;
     }
     updateReadingLog();
@@ -211,7 +211,7 @@ function displayBook(isUserInput) {
  * @param {Number} index - Index number.
  */
 function removeBookFromLibrary(index) {
-    if (library[index].hasRead === true) readingLog.read--;
+    if (library[index].hasRead) readingLog.read--;
     else readingLog.unread--;
     readingLog.totalBooks--;
     updateReadingLog();
@@ -294,7 +294,7 @@ closeBtn.addEventListener("click", e => form.style.display = "none");
 
 submitBtn.addEventListener("click", e => {
     if (library.length === 0) booksContainer.firstElementChild.remove();
-    if (validateForm() === true) {
+    if (validateForm()) {
         addBookToLibrary(true);
         resetLibraryGrid();
         displayBook(true);
@@ -310,7 +310,8 @@ booksContainer.addEventListener("click", e => {
         else checkbox.setAttribute("checked", "true");
     }
     if (e.target.tagName === "IMG") {
-        const index = parseInt(e.target.closest(".book").getAttribute("data-index"));
+        const deleteBtn = e.target;
+        const index = parseInt(deleteBtn.closest(".book").getAttribute("data-index"));
         removeBookFromLibrary(index);
         removeAllChildNodes(booksContainer);
         displayBook(false);
