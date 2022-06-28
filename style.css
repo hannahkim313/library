@@ -27,17 +27,6 @@ img[src*="plus"] {
     width: 1rem;
 }
 
-.overlay {
-    width: 100%;
-    height: 100%;
-
-    background-color: black;
-    opacity: 0.3;
-
-    position: fixed;
-    z-index: 2;
-}
-
 /******************************************************************************/
 /* Selectors for the header start here.
 /******************************************************************************/
@@ -109,6 +98,19 @@ main {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
     align-items: center;
+}
+
+/* Selectors for the overlay start here. */
+
+.overlay {
+    width: 100%;
+    height: 100%;
+
+    background-color: black;
+    opacity: 0.3;
+
+    position: fixed;
+    z-index: 2;
 }
 
 /* Selectors for the reading log start here. */
