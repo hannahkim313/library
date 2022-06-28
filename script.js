@@ -6,6 +6,7 @@ const menu = document.querySelector("menu");
 const addBtn = document.querySelector(".default");
 
 const main = document.querySelector("main");
+const overlay = document.querySelector(".overlay");
 
 const totalBooks = document.querySelector(".total");
 const read = document.querySelector(".read");
@@ -254,7 +255,7 @@ function removeAllChildNodes(parent) {
  */
 function resetLibraryGrid() {
     if (library.length === 1) {
-        booksContainer.style.alignItems = "normal";
+        booksContainer.style.alignItems = "initial";
         booksContainer.style.gridTemplateColumns = "repeat(auto-fit, 300px)";
         booksContainer.style.gridTemplateRows = "150px";
     }
@@ -276,6 +277,7 @@ function updateReadingLog() {
 window.addEventListener("pageshow", e => {
     addBookToLibrary(false);
     displayBook(false);
+    overlay.style.display = "none";
     form.style.display = "none";
     if (mediaQuery.matches) makeButtonSmall();
 });
@@ -286,11 +288,15 @@ window.addEventListener("resize", e => {
 });
 
 addBtn.addEventListener("click", e => {
+    overlay.style.display = "initial";
     form.style.display = "flex";
     clearForm();
 });
 
-closeBtn.addEventListener("click", e => form.style.display = "none");
+closeBtn.addEventListener("click", e => {
+    overlay.style.display = "none";
+    form.style.display = "none";
+});
 
 submitBtn.addEventListener("click", e => {
     if (library.length === 0) booksContainer.firstElementChild.remove();
@@ -299,6 +305,7 @@ submitBtn.addEventListener("click", e => {
         resetLibraryGrid();
         displayBook(true);
         e.preventDefault();
+        overlay.style.display = "none";
     }
 });
 
