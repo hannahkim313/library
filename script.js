@@ -300,7 +300,7 @@ closeBtn.addEventListener("click", e => {
 });
 
 submitBtn.addEventListener("click", e => {
-    if (library.length === 0) booksContainer.firstElementChild.remove();
+    if (library.length === 0 && validateForm()) booksContainer.firstElementChild.remove();
     if (validateForm()) {
         addBookToLibrary(true);
         resetLibraryGrid();
