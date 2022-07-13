@@ -37,30 +37,17 @@ const readingLog = {
  * Constructors start here.
  ******************************************************************************/
 
-/**
- * Constructs a book object.
- * @param {String} title - Title of book.
- * @param {String} author - Author of book.
- * @param {String} pages - Number of pages of book.
- * @param {Boolean} hasRead - True if user has read the book.
- */
-function Book(title, author, pages, hasRead) {
-    this.title = title,
-    this.author = author,
-    this.pages = pages,
-    this.hasRead = hasRead
-}
+class Book {
+    constructor(title, author, pages, hasRead) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.hasRead = hasRead;
+    }
 
-/*******************************************************************************
- * Prototype declarations start here.
- ******************************************************************************/
-
-/**
- * Changes the read status of a book at a given index of library array.
- * @param {Number} index - Index number.
- */
-Book.prototype.changeReadStatus = function(index) {
-    this.hasRead = this.hasRead ? false : true;
+    changeReadStatus = (index) => {
+        this.hasRead = this.hasRead ? false : true;
+    };
 };
 
 /*******************************************************************************
